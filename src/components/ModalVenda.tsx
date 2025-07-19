@@ -1,3 +1,4 @@
+import { inputTextToFormattedNumber } from "@/utils/numberInputHelpers";
 import { useState } from "react";
 
 interface ModalVendaProps {
@@ -52,7 +53,6 @@ function ModalVenda({ onClose }: ModalVendaProps) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 overflow-auto">
       <div className="bg-white p-6 rounded-md w-full max-w-md shadow-lg max-h-[90vh] overflow-y-auto relative">
-        
         {/* Botão Fechar */}
         {onClose && (
           <button
@@ -150,10 +150,11 @@ function ModalVenda({ onClose }: ModalVendaProps) {
             Valor Bruto (R$)
           </label>
           <input
-            type="number"
             id="valorBruto"
             value={valorBruto}
-            onChange={(e) => setValorBruto(e.target.value)}
+            onChange={(e) =>
+              inputTextToFormattedNumber(e.target.value, setValorBruto)
+            }
             placeholder="Digite o valor bruto"
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-purple-600"
           />
@@ -165,10 +166,11 @@ function ModalVenda({ onClose }: ModalVendaProps) {
             Descontos Aplicados (R$)
           </label>
           <input
-            type="number"
             id="desconto"
             value={desconto}
-            onChange={(e) => setDesconto(e.target.value)}
+            onChange={(e) =>
+              inputTextToFormattedNumber(e.target.value, setDesconto)
+            }
             placeholder="Digite o desconto aplicado"
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-purple-600"
           />
@@ -180,10 +182,11 @@ function ModalVenda({ onClose }: ModalVendaProps) {
             Impostos, Comissões e Taxas (R$)
           </label>
           <input
-            type="number"
             id="imposto"
             value={imposto}
-            onChange={(e) => setImposto(e.target.value)}
+            onChange={(e) =>
+              inputTextToFormattedNumber(e.target.value, setImposto)
+            }
             placeholder="Digite o valor de impostos, comissões e taxas"
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-purple-600"
           />
@@ -195,10 +198,11 @@ function ModalVenda({ onClose }: ModalVendaProps) {
             Comissão (R$)
           </label>
           <input
-            type="number"
             id="comissao"
             value={comissao}
-            onChange={(e) => setComissao(e.target.value)}
+            onChange={(e) =>
+              inputTextToFormattedNumber(e.target.value, setComissao)
+            }
             placeholder="Digite a comissão"
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-purple-600"
           />
@@ -210,10 +214,11 @@ function ModalVenda({ onClose }: ModalVendaProps) {
             Valor Final (R$)
           </label>
           <input
-            type="number"
             id="valorFinal"
             value={valorFinal}
-            onChange={(e) => setValorFinal(e.target.value)}
+            onChange={(e) =>
+              inputTextToFormattedNumber(e.target.value, setValorFinal)
+            }
             placeholder="Digite o valor final da venda"
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-purple-600"
           />

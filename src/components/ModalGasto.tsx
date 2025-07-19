@@ -1,12 +1,15 @@
 import { useState } from "react";
 import type { Gasto } from "../types";
+import { inputTextToFormattedNumber } from "@/utils/numberInputHelpers";
 
 interface ModalGastoProps {
   onClose?: () => void;
 }
 
 function ModalGasto({ onClose }: ModalGastoProps) {
-  const [dataGasto, setDataGasto] = useState(new Date().toISOString().split("T")[0]);
+  const [dataGasto, setDataGasto] = useState(
+    new Date().toISOString().split("T")[0]
+  );
   const [nomeGasto, setNomeGasto] = useState("");
   const [preco, setPreco] = useState("");
   const [categoria, setCategoria] = useState("");
@@ -22,7 +25,9 @@ function ModalGasto({ onClose }: ModalGastoProps) {
       !categoria ||
       !tipoDespesa
     ) {
-      alert("Por favor, preencha todos os campos corretamente e com valores válidos.");
+      alert(
+        "Por favor, preencha todos os campos corretamente e com valores válidos."
+      );
       return;
     }
 
@@ -38,7 +43,9 @@ function ModalGasto({ onClose }: ModalGastoProps) {
       tipoDespesa,
     };
 
-    const gastosExistentes = JSON.parse(localStorage.getItem("gastos") || "[]") as Gasto[];
+    const gastosExistentes = JSON.parse(
+      localStorage.getItem("gastos") || "[]"
+    ) as Gasto[];
     const novosGastos = [...gastosExistentes, novoGasto];
 
     localStorage.setItem("gastos", JSON.stringify(novosGastos));
@@ -55,7 +62,6 @@ function ModalGasto({ onClose }: ModalGastoProps) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 overflow-auto z-50">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md transform transition-all relative">
-
         {/* Botão de Fechar "X" */}
         {onClose && (
           <button
@@ -73,7 +79,10 @@ function ModalGasto({ onClose }: ModalGastoProps) {
 
         {/* Campo Data */}
         <div className="mb-4">
-          <label htmlFor="data" className="block text-purple-600 mb-1 font-medium">
+          <label
+            htmlFor="data"
+            className="block text-purple-600 mb-1 font-medium"
+          >
             Data
           </label>
           <input
@@ -87,7 +96,10 @@ function ModalGasto({ onClose }: ModalGastoProps) {
 
         {/* Campo Nome do Gasto */}
         <div className="mb-4">
-          <label htmlFor="nomeGasto" className="block text-purple-600 mb-1 font-medium">
+          <label
+            htmlFor="nomeGasto"
+            className="block text-purple-600 mb-1 font-medium"
+          >
             Nome do Gasto
           </label>
           <input
@@ -102,14 +114,18 @@ function ModalGasto({ onClose }: ModalGastoProps) {
 
         {/* Campo Preço */}
         <div className="mb-4">
-          <label htmlFor="preco" className="block text-purple-600 mb-1 font-medium">
+          <label
+            htmlFor="preco"
+            className="block text-purple-600 mb-1 font-medium"
+          >
             Preço (R$)
           </label>
           <input
-            type="number"
             id="preco"
             value={preco}
-            onChange={(e) => setPreco(e.target.value)}
+            onChange={(e) =>
+              inputTextToFormattedNumber(e.target.value, setPreco)
+            }
             placeholder="Digite o preço"
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-purple-600"
           />
@@ -117,7 +133,10 @@ function ModalGasto({ onClose }: ModalGastoProps) {
 
         {/* Campo Categoria */}
         <div className="mb-4">
-          <label htmlFor="categoria" className="block text-purple-600 mb-1 font-medium">
+          <label
+            htmlFor="categoria"
+            className="block text-purple-600 mb-1 font-medium"
+          >
             Categoria
           </label>
           <select
@@ -133,16 +152,25 @@ function ModalGasto({ onClose }: ModalGastoProps) {
             <option value="impostos_taxas">Impostos e Taxas</option>
             <option value="investimentos_poupanca">Investimentos</option>
             <option value="dividas_emprestimos">Dívidas/Empréstimos</option>
-            <option value="folha_pagamento">Folha de Pagamento (Empresarial)</option>
-            <option value="vale_transporte">Vales Transporte (Empresarial)</option>
-            <option value="imposto_sobre_folha">Imposto sobre Folha (Empresarial)</option>
+            <option value="folha_pagamento">
+              Folha de Pagamento (Empresarial)
+            </option>
+            <option value="vale_transporte">
+              Vales Transporte (Empresarial)
+            </option>
+            <option value="imposto_sobre_folha">
+              Imposto sobre Folha (Empresarial)
+            </option>
             <option value="outros">Outros</option>
           </select>
         </div>
 
         {/* Campo Tipo de Despesa */}
         <div className="mb-6">
-          <label htmlFor="tipoDespesa" className="block text-purple-600 mb-1 font-medium">
+          <label
+            htmlFor="tipoDespesa"
+            className="block text-purple-600 mb-1 font-medium"
+          >
             Tipo de Despesa
           </label>
           <select
@@ -155,7 +183,9 @@ function ModalGasto({ onClose }: ModalGastoProps) {
             <option value="fixo_essencial">Fixo Essencial</option>
             <option value="fixo_nao_essencial">Fixo Não Essencial</option>
             <option value="variavel_essencial">Variável Essencial</option>
-            <option value="variavel_nao_essencial">Variável Não Essencial</option>
+            <option value="variavel_nao_essencial">
+              Variável Não Essencial
+            </option>
             <option value="investimento">Investimento</option>
             <option value="extraordinario">Extraordinário/Inesperado</option>
             <option value="recorrente">Recorrente (Assinaturas)</option>
