@@ -278,7 +278,7 @@ console.log("✅ Dados de gastos salvos no localStorage, incluindo o investiment
 
 O projeto está disponível online em:
 
-🔗 **https://codi-vercel2-0.vercel.app/**
+🔗 **https://codi-vercel3-0.vercel.app/**
 
 ---
 
